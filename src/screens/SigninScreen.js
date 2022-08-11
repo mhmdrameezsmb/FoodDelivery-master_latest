@@ -1,4 +1,4 @@
-import React from 'react';
+import React,{useState} from 'react';
 import {
   View,
   Text,
@@ -8,6 +8,7 @@ import {
   TouchableOpacity,
   Image,
 } from 'react-native';
+import { ToggleButton } from '../components';
 import Separator from '../components/Separator';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import Feather from 'react-native-vector-icons/Feather';
@@ -15,6 +16,7 @@ import {Colors, Fonts,Images} from '../constants';
 import {Display} from '../utils';
 
 const SigninScreen = ({navigation}) => {
+  const [isPasswordShow, setIsPasswordShow] = useState(false);  //no password showing
   return (
     <View style={styles.container}>
       <StatusBar
@@ -62,24 +64,28 @@ const SigninScreen = ({navigation}) => {
          color={Colors.DEFAULT_GREY} 
          style={{marginRight:10}}
          />
+         <View style={{flexDirection:'row',alignItems:'center',justifyContent:'space-between',flex:1,}}>
         <TextInput
-        secureTextEntry={true}
+        secureTextEntry={isPasswordShow ? false : true}
         placeholder="Password" 
         placeholderTextColor={Colors.DEFAULT_GREY}
         selectionColor={Colors.DEFAULT_GREY}    
         />
         <Feather
-         name="eye" 
-         size={22} 
-         color={Colors.DEFAULT_GREY} 
-         style={{marginRight:10}} 
-        />
+            name={isPasswordShow ? 'eye' : 'eye-off'}
+            size={22}
+            color={Colors.DEFAULT_GREY}
+            style={{marginRight: 10}}
+            onPress={() => setIsPasswordShow(!isPasswordShow)}
+          />
+        </View>
       </View>
       </View>
       <Text></Text>
       <View style={styles.forgotPasswordContainer}>
-        <View style={styles.remeberMeText}>
-          <Text>Remeber me</Text>
+        <View style={styles.toggleContainer}>
+          <ToggleButton size={0.5}/>
+          <Text style={styles.rememberMeText}>Remember me</Text>
         </View>
         <Text style={styles.forgotPasswordText}>Forgot Password</Text>
       </View>
@@ -96,7 +102,7 @@ const SigninScreen = ({navigation}) => {
           <View style={styles.signinButtonLogoContainer}>
             <Image source={Images.FACEBOOK}  style={styles.signinButtonLogo}/>
           </View>
-          <Text>Connect with Facebook</Text>
+          <Text style={styles.socialSigninButtonText}>Connect with Facebook</Text>
         </View>
       </TouchableOpacity>
       <TouchableOpacity style={styles.googleButton} >
@@ -104,7 +110,7 @@ const SigninScreen = ({navigation}) => {
           <View style={styles.signinButtonLogoContainer}>
             <Image source={Images.GOOGLE} style={styles.signinButtonLogo}/>
           </View>
-          <Text>Connect with Google</Text>
+          <Text style={styles.socialSigninButtonText}>Connect with Google</Text>
         </View>
       </TouchableOpacity>
     </View>
