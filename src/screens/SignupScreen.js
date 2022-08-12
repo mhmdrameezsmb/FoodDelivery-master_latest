@@ -1,4 +1,4 @@
-import React,{useState} from 'react';
+import React,{useState,useEffect}from 'react';
 import {
   View,
   Text,
@@ -8,14 +8,13 @@ import {
   TouchableOpacity,
   Image,
 } from 'react-native';
-import { ToggleButton } from '../components';
 import Separator from '../components/Separator';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import Feather from 'react-native-vector-icons/Feather';
 import {Colors, Fonts,Images} from '../constants';
 import {Display} from '../utils';
 
-const SigninScreen = ({navigation}) => {
+const SignupScreen = ({navigation}) => {
   const [isPasswordShow, setIsPasswordShow] = useState(false);  //no password showing
   return (
     <View style={styles.container}>
@@ -34,12 +33,16 @@ const SigninScreen = ({navigation}) => {
           size={30}
           onPress={() => navigation.goBack()}
         />
-        <Text style={styles.headerTitle}>Sign In</Text>
+        <Text style={styles.headerTitle}>Sign UP</Text>
       </View>
-      <Text style={styles.title}>Welcome</Text>
+      <Text style={styles.title}>Create Account</Text>
       <Text style={styles.content}>
-        Enter your username and password,and enjoy ordering food
+        Enter your Name,Email and password for sign up.
+        <Text style={styles.forgotPasswordText}  onPress={() => navigation.navigate('Sign')}>Already have account?</Text>
       </Text>
+      {/* <View style={styles.forgotPasswordContainer}>
+        <Text style={styles.forgotPasswordText}>Already have account?</Text>
+      </View> */}
       <View style={styles.inputContainer}>
         <View style={styles.inputSubContainer}>
           <Feather 
@@ -50,6 +53,24 @@ const SigninScreen = ({navigation}) => {
           />
           <TextInput  
           placeholder="Username" 
+          placeholderTextColor={Colors.DEFAULT_GREY}
+          selectionColor={Colors.DEFAULT_GREY}    
+          />
+        </View>
+      </View>
+      <Separator
+      height={15}
+      />
+      <View style={styles.inputContainer}>
+        <View style={styles.inputSubContainer}>
+          <Feather 
+          name="mail" 
+          size={22} 
+          color={Colors.DEFAULT_GREY} 
+          style={{marginRight:10}}
+          />
+          <TextInput  
+          placeholder="Email address"  
           placeholderTextColor={Colors.DEFAULT_GREY}
           selectionColor={Colors.DEFAULT_GREY}    
           />
@@ -84,23 +105,19 @@ const SigninScreen = ({navigation}) => {
       </View>
       </View>
       <Text></Text>
-      <View style={styles.forgotPasswordContainer}>
+      {/* <View style={styles.forgotPasswordContainer}>
         <View style={styles.toggleContainer}>
           <ToggleButton size={0.5}/>
           <Text style={styles.rememberMeText}>Remember me</Text>
         </View>
-        <Text style={styles.forgotPasswordText} onPress={() => navigation.navigate('forg')}>Forgot Password</Text>
-      </View>
-      <TouchableOpacity style={styles.signinButton}>
-        <Text style={styles.signinButtonText}>Sign In</Text>
-      </TouchableOpacity>
-      {/* <View style={styles.signupContainersin}>
-        <Text style={styles.accountText}>Forget your Password?</Text>
-        <Text style={styles.signupText}   onPress={() => navigation.navigate('forg')}>Reset Now</Text>
+        <Text style={styles.forgotPasswordText}>Already have account?</Text>
       </View> */}
+      <TouchableOpacity style={styles.signinButton}>
+        <Text style={styles.signinButtonText}>Create Account</Text>
+      </TouchableOpacity>
       <View style={styles.signupContainer}>
-        <Text style={styles.accountText}>Don't have an account?</Text>
-        <Text style={styles.signupText}   onPress={() => navigation.navigate('Signup')}>Sign Up</Text>
+        {/* <Text style={styles.accountText}>Don't have an account?</Text>
+        <Text style={styles.signupText}>Sign Up</Text> */}
       </View>
       <Text style={styles.orText}>OR</Text>
       <TouchableOpacity style={styles.facebookButton}>
@@ -153,7 +170,7 @@ const styles = StyleSheet.create({
     color: Colors.DEFAULT_BLACK,
   },
   content: {
-    fontSize: 20,
+    fontSize: 16,
     fontFamily: Fonts.POPPINS_MEDIUM,
     marginTop: 10,
     marginBottom: 20,
@@ -195,7 +212,7 @@ const styles = StyleSheet.create({
     fontFamily: Fonts.POPPINS_MEDIUM,
   },
   forgotPasswordText: {
-    fontSize: 12,
+    fontSize: 15,
     lineHeight: 12 * 1.4,
     color: Colors.DEFAULT_GREEN,
     fontFamily: Fonts.POPPINS_BOLD,
@@ -218,18 +235,10 @@ const styles = StyleSheet.create({
   signupContainer: {
     marginHorizontal: 20,
     justifyContent: 'center',
-    paddingVertical: 10,
+    paddingVertical: 20,
     flexDirection: 'row',
     alignItems: 'center',
   },
-  // signupContainersin: {
-  //   marginHorizontal: 0,
-  //   justifyContent: 'center',
-  //   paddingVertical: 12,
-  //   flexDirection: 'row',
-  //   alignItems: 'center',
-  // },
-
   signinButtonText: {
     fontSize: 18,
     lineHeight: 18 * 1.4,
@@ -320,4 +329,4 @@ const styles = StyleSheet.create({
 
 });
 
-export default SigninScreen;
+export default SignupScreen;
